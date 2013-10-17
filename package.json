@@ -1,6 +1,6 @@
 {
   "name": "gossipmonger-memory-storage",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "In-memory storage engine for Gossipmonger",
   "scripts": {
     "test": "node scripts/test.js"
