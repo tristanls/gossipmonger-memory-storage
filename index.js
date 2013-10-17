@@ -41,8 +41,8 @@ var MemoryStorage = module.exports = function MemoryStorage (options) {
     options = options || {};
 
     self.storage = {};
-    self.livePeers = {};
-    self.deadPeers = {};
+    self.livePeersMap = {};
+    self.deadPeersMap = {};
 };
 
 util.inherits(MemoryStorage, events.EventEmitter);
@@ -50,8 +50,8 @@ util.inherits(MemoryStorage, events.EventEmitter);
 MemoryStorage.prototype.deadPeers = function deadPeers () {
     var self = this;
 
-    var peers = Object.keys(self.deadPeers).map(function (deadPeerId) {
-        return self.deadPeers[deadPeerId];
+    var peers = Object.keys(self.deadPeersMap).map(function (deadPeerId) {
+        return self.deadPeersMap[deadPeerId];
     });
 
     return peers;
@@ -70,8 +70,8 @@ MemoryStorage.prototype.get = function get (id) {
 MemoryStorage.prototype.livePeers = function livePeers () {
     var self = this;
 
-    var peers = Object.keys(self.livePeers).map(function (livePeerId) {
-        return self.livePeers[livePeerId];
+    var peers = Object.keys(self.livePeersMap).map(function (livePeerId) {
+        return self.livePeersMap[livePeerId];
     });
 
     return peers;
@@ -86,10 +86,10 @@ MemoryStorage.prototype.put = function put (id, peer) {
 
     self.storage[id] = peer;
     if (peer.live) {
-        self.livePeers[id] = peer;
-        delete self.deadPeers[id];
+        self.livePeersMap[id] = peer;
+        delete self.deadPeersMap[id];
     } else {
-        self.deadPeers[id] = peer;
-        delete self.livePeers[id];
+        self.deadPeersMap[id] = peer;
+        delete self.livePeersMap[id];
     }
 };

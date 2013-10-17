@@ -4,21 +4,28 @@ _Stability: 1 - [Experimental](https://github.com/tristanls/stability-index#stab
 
 [![NPM version](https://badge.fury.io/js/gossipmonger-memory-storage.png)](http://npmjs.org/package/gossipmonger-memory-storage)
 
-An in-memory storage engine for [Gossipmonger](https://github.com/tristanls/node-gossipmonger) (an implementation of the Scuttlebutt gossip protocol endpoint for real-time peer-to-peer replication).
+An in-memory storage engine for [Gossipmonger](https://github.com/tristanls/gossipmonger) (an implementation of the Scuttlebutt gossip protocol endpoint for real-time peer-to-peer replication).
 
-## Installation
+## Usage
 
-    npm install gossipmonger-memory-storage
+```javascript
+var GossipmongerMemoryStorage = require('gossipmonger-memory-storage');
+var storage = new GossipmongerMemoryStorage();
+
+var deadPeers = storage.deadPeers();
+var livePeers = storage.livePeers();
+
+storage.put("foo", somePeerFoo);
+var peerFoo = storage.get("foo");
+```
 
 ## Tests
 
     npm test
 
-_NOTE: There are no tests right now._
-
 ## Overview
 
-Minimalistic default in-memory storage engine for [Gossipmonger](https://github.com/tristanls/node-gossipmonger).
+Minimalistic default in-memory storage engine for [Gossipmonger](https://github.com/tristanls/gossipmonger).
 
 ## Documentation
 
@@ -32,24 +39,24 @@ Minimalistic default in-memory storage engine for [Gossipmonger](https://github.
   * [memoryStorage.livePeers()](#memorystoragelivepeers)
   * [memoryStorage.put(id, peer)](#memorystorageputid-peer)
 
-#### new MemoryStorage()
+### new MemoryStorage()
 
 Creates a new MemoryStorage instance.
 
-#### memoryStorage.deadPeers()
+### memoryStorage.deadPeers()
 
   * Return: _Array_ An array of peers that are dead (`peer.live != true`).
 
-#### memoryStorage.get(id)
+### memoryStorage.get(id)
 
   * `id`: _String_ Id of peer to get.
   * Return: _Object_ Peer with given `id` or `undefined`.
 
-#### memoryStorage.livePeers()
+### memoryStorage.livePeers()
 
   * Return: _Array_ An array of peers that are live (`peer.live == true`).
 
-#### memoryStorage.put(id, peer)
+### memoryStorage.put(id, peer)
 
   * `id`: _String_ Id of peer to put.
   * `peer`: _Object_ Peer to put into storage.
